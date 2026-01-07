@@ -29,7 +29,7 @@ for(let k=0;k<5;k++)
 {
     for(let j=0;j<=i;j++)
     {
-        console.log(" *");
+        console.log("*");
     }
 }
 

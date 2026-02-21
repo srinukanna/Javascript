@@ -1,17 +1,26 @@
-const k = '*';
+//for in loop
+let r=[{
+    name : "kanna",
+    age :21,
+    g:"male"
+},{
+    name : "srinu",
+    age :22,
+    g:"male"
+    
+},{
+    name : "ayyappa",
+    age :23,
+    g:"male"}]
 
-const r = [];
-
-let result = " ";
-
-for (i = 0; i <= 8; i++) {
-    r.push(k);
+for (const key in r) {
+console.log(r[key]);
 }
 
-console.log(r);
+//for of loop, ob = value not an index,console.log(arr[ob]);
 
-for (const it of r) {
-    result = result + "\n" + r;
+let arr=["Hi","hello"];
+
+for(const ob of arr){
+  console.log(ob);
 }
-
-console.log(result);

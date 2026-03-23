@@ -1,5 +1,6 @@
 let array = ["kanna","kabali","srinu"]
 array.push("hero");
+
 let obj = [
     {
      Movie: "Kabali",
@@ -25,6 +26,11 @@ let obj = [
      Movie: "King",
      Number: 1,
      Director:"kanna"
-    },
+    }
 ];
-console.log(obj[0].Movie);
+
+
+for(const key in obj)
+{
+  console.log(obj[key]);
+}

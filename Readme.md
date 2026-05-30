@@ -93,3 +93,24 @@ let freeCodeCampStudents;
 * special characters like exclamation points (!) or at (@) symbols, in your variable names. 
 
 * It is best to keep variable names readable by using letters, numbers, underscores, or dollar signs.
+
+
+## Declaration of variables
+* let
+* const
+* var
+
+```
+let a=10;
+let a;// cant redeclare 
+let a=40;// not possible (cant be redeclare)
+a=40;// only this one is possible (reassign)
+
+var a = 10;
+var a; we can do this
+var a = 30 or a = 30 // both redeclare and reassign can be possible
+
+const a =40;// fixed value  
+const a = 50 or a = 50 // we cant able to do these two or we cant redeclare and reassign or reassign
+
+```

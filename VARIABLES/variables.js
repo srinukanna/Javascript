@@ -27,4 +27,4 @@ var e = 50;
 let f = 60;
   f = 80;
 
-console.log(a);
+console.log(e);

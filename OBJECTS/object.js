@@ -3,7 +3,7 @@ array.push("hero");
 
 let obj = [
     {
-     Movie: "Kabali",
+     Movie: "lion",
      Number: 1,
      Director:"Kanna"
     },

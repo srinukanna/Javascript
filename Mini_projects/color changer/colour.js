@@ -7,7 +7,8 @@ blue_button.innerText="Blue";
 let black_button = document.createElement('button');
 black_button.innerText="black";
 
-green_button.addEventListener("click",()=>{
+green_button.addEventListener("click",(event)=>{
+    console.log(event);
     document.body.style.backgroundColor="green"; 
     green_button.style.backgroundColor="green";
     green_button.style.color="white";

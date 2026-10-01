@@ -24,3 +24,12 @@ let arr=["Hi","hello"];
 for(const ob of arr){
   console.log(ob);
 }
+
+// loops
+// array.forEach((element, index, array) => {
+//   // Your code here
+// });
+
+r.forEach(()=>{
+
+})

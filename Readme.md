@@ -114,3 +114,26 @@ const a =40;// fixed value
 const a = 50 or a = 50 // we cant able to do these two or we cant redeclare and reassign or reassign
 
 ```
+## Variables
+* let
+* const
+* var
+
+## loops
+* for loop - basic 
+* do while loop
+* while loop
+* for of - arrays
+* for in - objects
+
+### for loop
+```
+const arr = [1,2,3,4,5];
+
+```
+* to print 5 numbers
+```
+ for(let i=0;i<=5;i++){
+    console.log(i);
+ }
+```

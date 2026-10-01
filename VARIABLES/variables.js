@@ -10,7 +10,7 @@ var a;
 let b;
 
 // assignment(value);
- a =20;
+ a=20;
  b=30;
 
 //redeclare(rename)
@@ -28,3 +28,4 @@ let f = 60;
   f = 80;
 
 console.log(e);
+

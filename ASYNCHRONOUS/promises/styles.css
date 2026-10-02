@@ -1,0 +1,14 @@
+.img{
+    margin: 0 auto;
+    border: 2px solid whitesmoke;
+    box-sizing: border-box;
+    height : auto;
+    width:auto;
+    padding:5px;
+}
+
+/* img{
+    height: 100%;
+    width:100%;
+    border-radius: 12px;
+} */

@@ -115,25 +115,90 @@ const a = 50 or a = 50 // we cant able to do these two or we cant redeclare and 
 
 ```
 ## Variables
-* let
-* const
-* var
+* let - block scope and can be reassign
+* const - block scope and cant be reassign 
+* var - global scope and depreciated
+
+## Template literals
+
+## Datatypes
+* number
+* string
+* boolean
+
+## Operators
+* Arithmetic
+* Relational 
+* Assignment
+* Logical
+* Bitwise 
+* Conditional
+* Decrement/Increment
+
+## NUll vs Undefined
+
+## Functions and Arrow Functions
+* create a function
+* executing a function
 
 ## loops
 * for loop - basic 
 * do while loop
 * while loop
-* for of - arrays
-* for in - objects
+* switch case
+
 
 ### for loop
-```
-const arr = [1,2,3,4,5];
-
-```
 * to print 5 numbers
 ```
  for(let i=0;i<=5;i++){
     console.log(i);
  }
 ```
+
+## Arrays and methods
+* push()
+* pop()
+* shift()
+* unshift()
+
+## Objects
+
+
+
+## Arrays and Objects with loops
+* for of - arrays
+* for in - objects
+* forEach
+
+## DOM
+* Selecting
+* Accessing
+* Creating
+* Updating
+* Deleting
+
+### Styling
+* Reading attributes
+* changing attributes
+
+### Text related
+
+
+## Must concepts
+* Form handling
+* Event bubbling 
+* Event delegation
+* Event loop
+
+## Synchronous vs Asynchronous
+* Callbacks
+* Callback hell
+* Promises
+* Promises chaining
+* async await
+
+## Advanced array methods and objects
+* Array and Object Destructuring
+* spread operator
+* splice,shift,unshift

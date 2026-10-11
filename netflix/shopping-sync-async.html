@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sync vs Async: see the difference</title>
+
+  <style>:root{--navy:#131921;--green:#067d62;--red:#b12704;--blue:#007185;--muted:#565959}*{box-sizing:border-box}body{margin:0;background:#eaeded;color:#0f1111;font:15px/1.5 system-ui,sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #3699ff}[hidden]{display:none!important}.top,.nav,.subnav{display:flex;align-items:center;flex-wrap:wrap;gap:12px;background:var(--navy);color:white;padding:12px 18px}.top{justify-content:space-between}.top h1{font-size:22px;margin:0}.tabs{display:flex;gap:8px}.tab{padding:10px;border:2px solid transparent;border-radius:8px;background:#232f3e;color:white}.tab.active{background:white;color:#111;border-color:#f90}.lesson,.warning{max-width:1200px;margin:16px auto;padding:0 20px}.lesson-main{font-size:20px;font-weight:700}.try,.warning{background:#fff4d6;padding:12px;border-radius:6px}.lesson-sub,.hint{color:var(--muted)}.layout{max-width:1200px;margin:20px auto;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;padding:0 20px}.shop{position:relative;background:white;border-radius:10px;overflow:hidden;min-height:560px}.logo{font-size:26px;font-weight:800;color:white;text-decoration:none}.deliver,.acct{line-height:1.2}.deliver small,.acct small{display:block}.searchbar{display:flex;flex:1;min-width:210px;height:42px}.searchbar input{min-width:0;flex:1}.btn-search{background:#febd69;border:0}.cart{background:none;color:white;border:1px solid white;display:flex;gap:4px;align-items:center}.cart-icon{position:relative}.count{color:#ffb339;font-weight:bold}.subnav{background:#232f3e;font-size:12px}.subbtn{background:none;color:white;border:1px solid white}.results-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;padding:12px}.results-bar h2{font-size:16px;margin:0}.loading{display:flex;gap:8px;align-items:center}.spinner{width:20px;height:20px;border:3px solid #ddd;border-top-color:var(--blue);border-radius:50%}.progress{height:5px;background:#eee}#bar{height:100%;background:#f90}.body{display:flex}.filters{width:180px;flex:none;padding:12px}.filters label{display:block}.grid{flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.product{padding:16px;border:1px solid #eee}.pic{height:150px;display:flex;align-items:center;justify-content:center}.pic img{max-width:100%;max-height:150px;object-fit:contain}.product h4{font-size:15px}.price{font-size:24px}.stars{color:#e47911}.ship,.hint,.elapsed{font-size:12px}.empty{padding:30px;grid-column:1/-1}.yellow,.add-btn{background:#ffd814;border:1px solid #fcd200;border-radius:18px;padding:8px 14px}.wide,.big{width:100%}.link{border:0;background:none;color:var(--blue)}.freeze-overlay{display:none;position:absolute;inset:0;z-index:5;background:rgba(169,192,214,.65);align-items:center;justify-content:center;text-align:center;font-size:26px;font-weight:800;pointer-events:none}.freeze-overlay small{display:block;font-size:14px;max-width:500px;padding:12px}body.frozen .freeze-overlay{display:flex}.side{display:grid;gap:14px;align-content:start}.card,.panel{background:white;padding:16px;border-radius:8px;border:1px solid #ddd}.card h3{margin:0 0 8px;font-size:16px}.row{display:flex;justify-content:space-between;gap:8px;padding:5px 0}.pill{padding:2px 9px;border-radius:20px;background:#888;color:white}.free,.done,.good{background:var(--green)}.busy,.bad{background:var(--red);color:white}.working{background:#bc6900}.worker-body{display:flex;gap:12px}.bot{width:48px;height:48px;background:#4a6fa5;border-radius:10px;flex:none}.bot.busy{background:var(--red)}.bubble{font-size:13px}.timeline,.log,.trace{list-style:none;padding:0}.timeline li{padding:4px 8px;border-left:4px solid #ddd}.timeline li.done{border-color:var(--green);background:#eaf7ee;color:#111}.timeline li.active{border-color:#f90}.log{height:200px;overflow:auto;font-size:12px}.log li{padding:5px;border-bottom:1px solid #ddd}.log time{color:#777;margin-right:6px}.log .good,.log .bad{background:none;color:var(--green)}.log .bad{color:var(--red)}#beat{width:100%;height:72px;background:#0f1a14;border-radius:6px}.btn-reset{padding:8px;width:100%}#viewCart,#viewCheckout,#viewDone{padding:16px;background:#eaeded}.two,.co-grid{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:12px}.line,.mini{display:flex;align-items:center;gap:12px;border-bottom:1px solid #eee;padding:10px 0}.line img{width:90px;height:90px;object-fit:contain}.info,.mini span{flex:1}.mini img{width:50px}.ctl{display:flex;gap:10px}.subline{font-size:18px}.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.fg label,.pay-body label{display:flex;flex-direction:column}.fg input,.pay-body input,.pay-body select{width:100%;padding:7px}.payopt{display:flex;align-items:center;gap:8px;margin:10px 0}.payopt small{font-size:10px}.pay-body{padding:8px;background:#fafafa}.co-sec{margin-bottom:12px}.co-head{display:flex;justify-content:space-between}.slow-opt{display:block;font-size:12px;background:#fff4d6;padding:10px}.invalid{outline:2px solid var(--red)}.err{color:var(--red)}.center{text-align:center}.receipt{padding:18px;background:#f7fafa}.added{padding:12px;background:#eaf7ee}.trace{font-size:12px}.trace li{padding:5px;border-bottom:1px solid #ddd;overflow-wrap:anywhere}.trace code{display:block}.trace em{font-style:normal;color:#777}.trace-title{font-weight:700}.tick{font-size:40px;color:var(--green)}@media(max-width:1000px){.layout{grid-template-columns:1fr}.two,.co-grid{grid-template-columns:1fr}} 
+</style>
+
+</head>
+
+<body>
+
+
+
+<header class="top">
+
+  <h1>Synchronous vs Asynchronous</h1>
+
+  <div class="tabs" role="tablist">
+
+    <button class="tab active" id="tab-sync" role="tab" data-mode="sync">1. Synchronous (blocking)</button>
+
+    <button class="tab" id="tab-async" role="tab" data-mode="async">2. Asynchronous (non-blocking)</button>
+
+  </div>
+
+</header>
+
+
+
+<section class="lesson" id="lesson"><div id="connection" style="padding:12px;background:white;border:1px solid #ddd;border-radius:8px"><b id="startup">JavaScript has not started. Download this file and open it in Chrome.</b><p id="apiMessage">Live API mode needs internet. Search may take longer than 3 seconds.</p><button id="offlineBtn" class="yellow">Use downloaded sample data</button> <button id="liveBtn" class="yellow">Use live API</button></div>
+
+  <p class="lesson-main" id="lessonMain"></p>
+
+  <p class="try" id="tryText"></p>
+
+  <p class="lesson-sub">Real HTTP requests • sample shopping data • no payment credentials sent. The problem is not synchronous code itself. The problem is long blocking work on the main thread.</p>
+
+</section>
+
+
+
+<div class="warning" id="warning">
+
+  <strong>Learning mode:</strong> Synchronous XHR is deprecated. It is used here only to demonstrate blocking. DummyJSON supplies sample products and simulated carts, not live inventory or real payments.
+
+</div>
+
+
+
+<main class="layout">
+
+
+
+  <!-- ===== Fake shop ===== -->
+
+  <section class="shop" id="shop">
+
+    <div class="freeze-overlay" id="freezeOverlay">
+
+      <div>UI FROZEN<small id="freezeMsg">The main thread is stuck in a slow loop. Nothing can update.</small></div>
+
+    </div>
+
+
+
+    <nav class="nav">
+
+      <a class="logo" href="#" data-go="results" onclick="return false">shopzon<span class="smile"></span></a>
+
+      <div class="deliver"><small>Deliver to</small><b>Your address</b></div>
+
+      <div class="searchbar">
+
+        <select id="category" aria-label="Category"><option>All</option><option>Computers</option><option>Electronics</option></select>
+
+        <input id="searchInput" type="text" value="Laptop" aria-label="Search shopzon" autocomplete="off">
+
+        <button id="searchBtn" class="btn-search" aria-label="Search" title="Search">
+
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0f1111" stroke-width="2.4" stroke-linecap="round"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+
+        </button>
+
+      </div>
+
+      <div class="acct"><small>Hello, sign in</small><b>Account & Lists</b></div>
+
+      <div class="acct"><small>Returns</small><b>& Orders</b></div>
+
+      <button id="cartBtn" class="cart" aria-label="Cart">
+
+        <span class="cart-icon">
+
+          <span class="count" id="cartCount">0</span>
+
+          <svg viewBox="0 0 32 28" width="38" height="32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 2h5l3 15h15l3-11H8"/><circle cx="12" cy="24" r="2"/><circle cx="22" cy="24" r="2"/></svg>
+
+        </span>
+
+        <b>Cart</b>
+
+      </button>
+
+    </nav>
+
+
+
+    <div class="subnav">
+
+      <button id="filtersBtn" class="subbtn">☰ Filters</button>
+
+      <span>Today's Deals</span><span>Customer Service</span><span>Registry</span><span>Gift Cards</span><span>Sell</span>
+
+    </div>
+
+
+
+    <div id="viewResults">
+
+    <div id="addedBanner" class="added" hidden></div>
+
+    <div class="results-bar">
+
+      <h2 id="resultsTitle">Type something and press Search</h2>
+
+      <div class="loading" id="loading" hidden>
+
+        <span class="spinner" id="spinner"></span>
+
+        <span id="loadingText">Loading...</span> <span id="elapsed" class="elapsed">0.0s / 4.0s</span>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="progress" title="Request progress"><div id="bar"></div></div>
+
+
+
+    <div class="body">
+
+      <aside class="filters" id="filtersPanel" hidden>
+
+        <h4>Delivery Day</h4>
+
+        <label><input type="checkbox"> Get It Today</label>
+
+        <label><input type="checkbox"> Get It by Tomorrow</label>
+
+        <h4>Customer Reviews</h4>
+
+        <label><input type="checkbox"> <span class="stars">★★★★☆</span> & Up</label>
+
+        <h4>Brand</h4>
+
+        <label><input type="checkbox"> AeroBook</label>
+
+        <label><input type="checkbox"> ProMax</label>
+
+        <label><input type="checkbox"> GameForge</label>
+
+        <h4>Price</h4>
+
+        <label><input type="checkbox"> Under ₹50,000</label>
+
+        <label><input type="checkbox"> ₹50,000 - ₹1,00,000</label>
+
+        <label><input type="checkbox"> Over ₹1,00,000</label>
+
+      </aside>
+
+      <div class="grid" id="grid">
+
+        <p class="empty">No products yet. Press Search to start the slow task.</p>
+
+      </div>
+
+    </div>
+
+    </div><!-- /viewResults -->
+
+
+
+    <!-- ===== Cart page ===== -->
+
+    <div id="viewCart" hidden></div>
+
+
+
+    <!-- ===== Checkout page ===== -->
+
+    <div id="viewCheckout" hidden>
+
+      <div class="co-head"><h2>Checkout (<span id="coCount">0</span> items)</h2><span class="ship">🔒 Secure checkout</span></div>
+
+      <div class="co-grid">
+
+        <div>
+
+          <section class="panel co-sec">
+
+            <h3>1  Delivery address</h3>
+
+            <div class="fg">
+
+              <label>Full name<input id="fName" value="Asha Rao"></label>
+
+              <label>Mobile number<input id="fPhone" value="9876543210" inputmode="numeric" maxlength="10"></label>
+
+              <label>PIN code<input id="fPin" value="560001" inputmode="numeric" maxlength="6"></label>
+
+              <label>Address<input id="fAddr" value="12, MG Road"></label>
+
+              <label>Town / City<input id="fCity" value="Bengaluru"></label>
+
+            </div>
+
+          </section>
+
+          <section class="panel co-sec">
+
+            <h3>2  Payment method</h3>
+
+            <label class="payopt"><input type="radio" name="pay" value="upi" checked> <b>UPI</b><small>Google Pay, PhonePe, Paytm, BHIM</small></label>
+
+            <div class="pay-body" data-for="upi">
+
+              <label>Enter your UPI ID<input id="upiId" placeholder="name\@okhdfcbank" autocomplete="off"></label>
+
+            </div>
+
+            <label class="payopt"><input type="radio" name="pay" value="netbanking"> <b>Net Banking</b><small>All major banks</small></label>
+
+            <div class="pay-body" data-for="netbanking" hidden>
+
+              <label>Choose your bank
+
+                <select id="bank"><option value="">Select a bank</option><option>State Bank of India</option><option>HDFC Bank</option><option>ICICI Bank</option><option>Axis Bank</option><option>Kotak Mahindra Bank</option><option>Punjab National Bank</option><option>Bank of Baroda</option></select>
+
+              </label>
+
+            </div>
+
+            <label class="payopt"><input type="radio" name="pay" value="card"> <b>Credit or debit card</b><small>Visa, Mastercard, RuPay</small></label>
+
+            <div class="pay-body" data-for="card" hidden>
+
+              <label>Card number<input id="cardNo" placeholder="1234 5678 9012 3456" inputmode="numeric" maxlength="23" autocomplete="off"></label>
+
+              <label>Name on card<input id="cardName"></label>
+
+              <label>Expiry (MM/YY)<input id="cardExp" placeholder="MM/YY" maxlength="5" autocomplete="off"></label>
+
+              <label>CVV<input id="cardCvv" placeholder="123" inputmode="numeric" maxlength="4" type="password" autocomplete="off"></label>
+
+            </div>
+
+            <label class="payopt"><input type="radio" name="pay" value="cod"> <b>Pay on Delivery</b><small>Cash or card at your door</small></label>
+
+            <div class="pay-body" data-for="cod" hidden><span class="ship">No payment now. Pay when the order arrives.</span></div>
+
+            <p class="ship"><button class="link" id="fillDemo">Fill demo payment details</button> (test card 4111 1111 1111 1111, any future expiry, CVV 123)</p>
+
+          </section>
+
+          <section class="panel co-sec"><h3>3  Review items</h3><div id="coItems"></div></section>
+
+        </div>
+
+        <aside class="panel co-box">
+
+          <button class="yellow big" id="payBtn">Place your order and pay</button>
+
+          <p id="coError" class="err" hidden></p>
+
+          <h4>Order Summary</h4>
+
+          <div class="row"><span>Items</span><span id="sumItems"></span></div>
+
+          <div class="row"><span>Delivery</span><span>FREE</span></div>
+
+          <div class="row"><b>Order Total</b><b id="sumOrder"></b></div>
+
+          <label class="slow-opt"><input type="checkbox" id="slowBank" checked> Add a 3-second API response delay to demo verification (no real payment)</label>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===== Order confirmed ===== -->
+
+    <div id="viewDone" hidden></div>
+
+  </section>
+
+
+
+  <!-- ===== Side panel ===== -->
+
+  <aside class="side">
+
+
+
+    <div class="card">
+
+      <h3>Shopping action trace</h3>
+
+      <p class="trace-title" id="traceTitle"></p>
+
+      <ol class="trace" id="trace"></ol>
+
+      <p class="hint" id="traceTotal"></p>
+
+    </div>
+
+
+
+    <div class="card status">
+
+      <h3>Live status</h3><button id="probe" class="yellow">Test a click while waiting</button><p id="probeResult">Test clicks: 0</p>
+
+      <div class="row"><span>Main thread</span><b id="threadStatus" class="pill free">FREE</b></div>
+
+      <div class="row"><span>Request</span><b id="reqStatus" class="pill idle">IDLE</b></div>
+
+      <div class="row"><span>Animation callbacks</span><b id="frames">0</b></div>
+
+      <div class="row"><span>Last click reacted after</span><b id="delay" class="pill idle">-</b></div>
+
+      <p class="hint">Frames drawn is counted by JavaScript. If it stops, the main thread is blocked.</p>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <h3>Heartbeat monitor</h3>
+
+      <canvas id="beat" width="292" height="72"></canvas>
+
+      <div class="row"><span>Gap between screen updates</span><b id="gap">-</b></div>
+
+      <div class="row"><span>Longest frame gap</span><b id="longest">0 ms</b></div>
+
+      <p class="hint">Each point is one screen update. Frame timing varies by screen and browser. Large gaps can indicate blocking; background tabs are excluded.</p>
+
+    </div>
+
+
+
+    <div class="card worker">
+
+      <h3>JavaScript worker</h3>
+
+      <div class="worker-body">
+
+        <div class="bot" id="bot"><i class="eye"></i><i class="eye"></i><i class="mouth"></i></div>
+
+        <div class="bubble" id="bubble">Waiting for work.</div>
+
+      </div>
+
+      <p class="hint">The main JavaScript thread handles your event handlers. Browser networking runs separately.</p>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <h3>Timeline</h3>
+
+      <ol class="timeline" id="timeline"></ol>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <h3>Activity log</h3>
+
+      <ul class="log" id="log"></ul>
+
+      <button id="resetBtn" class="btn btn-reset">Reset</button>
+
+    </div>
+
+  </aside>
+
+</main>
+
+
+
+<script>/* Educational comparison: genuine synchronous XHR vs asynchronous fetch.
+   DummyJSON is a real HTTP service containing SAMPLE data.
+   The delay=3000 parameter simulates a slow server. No busy loops.
+   Cart writes are simulated by the API and are not persisted on its server. */
+const $ = id => document.getElementById(id);
+const API = 'https://dummyjson.com';
+let offline=false;
+const SAMPLE=[{"id": 78, "title": "Apple MacBook Pro 14 Inch Space Grey", "price": 1999.99, "stock": 24, "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/thumbnail.webp"}, {"id": 79, "title": "Asus Zenbook Pro Dual Screen Laptop", "price": 1799.99, "stock": 45, "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/thumbnail.webp"}, {"id": 80, "title": "Huawei Matebook X Pro", "price": 1399.99, "stock": 75, "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/huawei-matebook-x-pro/thumbnail.webp"}, {"id": 81, "title": "Lenovo Yoga 920", "price": 1099.99, "stock": 40, "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/lenovo-yoga-920/thumbnail.webp"}, {"id": 82, "title": "New DELL XPS 13 9300 Laptop", "price": 1499.99, "stock": 74, "thumbnail": "https://cdn.dummyjson.com/product-images/laptops/new-dell-xps-13-9300-laptop/thumbnail.webp"}];
+function sampleResponse(path,body){if(path.startsWith('/products/search')){const q=new URLSearchParams(path.split('?')[1]).get('q').toLowerCase();return {products:SAMPLE.filter(p=>(p.title+' laptop').toLowerCase().includes(q))};}if(path.startsWith('/products/')){const p=SAMPLE.find(p=>p.id===Number(path.split('/')[2]));if(!p)throw new Error('Sample product not found');return {...p};}if(path==='/carts/add')return {products:body.products.map(l=>({...SAMPLE.find(p=>p.id===l.id),quantity:l.quantity}))};return {status:'ok'};}
+
+let mode='sync', working=false, products=[], cart=[], order=null;
+let generation=0, controller=null, operationStart=0, frames=0, lastFrame=performance.now(), longest=0, probes=0;
+let trace=[], gaps=[];
+const money = n => '$'+Number(n).toFixed(2); // API prices are USD; no invented conversion rate.
+function log(message,kind=''){
+ const li=document.createElement('li'),time=document.createElement('time'),span=document.createElement('span');
+ time.textContent=new Date().toLocaleTimeString();span.textContent=message;span.className=kind;
+ li.append(time,span);$('log').append(li);$('log').scrollTop=$('log').scrollHeight;
+}
+function status(thread,request){$('threadStatus').textContent=thread;$('threadStatus').className='pill '+thread.toLowerCase();$('reqStatus').textContent=request;$('reqStatus').className='pill '+request.toLowerCase();}
+function record(name,note){trace.push({name,note});const li=document.createElement('li'),code=document.createElement('code'),em=document.createElement('em');code.textContent=trace.length+'. '+name;em.textContent=note;li.append(code,em);$('trace').append(li);}
+function react(e){let ms=Math.max(0,Math.round(performance.now()-e.timeStamp));$('delay').textContent=ms+' ms';$('delay').className='pill '+(ms>200?'bad':'good');return ms;}
+function showView(name){['results','cart','checkout','done'].forEach(v=>$('view'+v[0].toUpperCase()+v.slice(1)).hidden=v!==name);}
+function count(){return cart.reduce((s,l)=>s+l.quantity,0);}
+function total(){return cart.reduce((s,l)=>s+l.price*l.quantity,0);}
+function badge(){$('cartCount').textContent=count();}
+function endpoint(path,delay=3000){return API+path+(path.includes('?')?'&':'?')+'delay='+delay;}
+// SYNC: send() cannot return until the server responds. Nothing else in JS runs meanwhile.
+function requestSync(path,method='GET',body=null,delay=3000){
+ if(offline){record('OFFLINE simulated wait','Local busy loop, not a network request: '+delay+' ms');const end=performance.now()+delay;while(performance.now()<end){}return sampleResponse(path,body);}
+ const url=endpoint(path,delay),xhr=new XMLHttpRequest(),start=performance.now();
+ record(method+' '+path,'SYNCHRONOUS: send() blocks until response. Server delay '+delay+' ms.');
+ xhr.open(method,url,false); // false = synchronous; deprecated, educational only.
+ if(body)xhr.setRequestHeader('Content-Type','application/json');
+ xhr.send(body?JSON.stringify(body):null);
+ if(xhr.status<200||xhr.status>=300)throw new Error('HTTP '+xhr.status);
+ const data=JSON.parse(xhr.responseText);record('Response received',Math.round(performance.now()-start)+' ms; JS can continue.');return data;
+}
+// ASYNC: fetch() yields while networking waits. Await pauses THIS function, not the main thread.
+async function requestAsync(path,method='GET',body=null,delay=3000){
+ if(offline){const token=generation;record('OFFLINE simulated wait','Timer, not a network request: '+delay+' ms');await new Promise(resolve=>setTimeout(resolve,delay));if(token!==generation)throw new Error('Operation cancelled');return sampleResponse(path,body);}
+ const token=generation,start=performance.now();record(method+' '+path,'ASYNCHRONOUS: waiting for server; other events can run.');
+ const response=await fetch(endpoint(path,delay),{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined,signal:AbortSignal.any([controller.signal,AbortSignal.timeout(15000)]),cache:'no-store'});
+ if(!response.ok)throw new Error('HTTP '+response.status);
+ const data=await response.json();if(token!==generation)throw new Error('Operation cancelled');record('Response received',Math.round(performance.now()-start)+' ms; resume this action.');return data;
+}
+function timeline(labels,done){$('timeline').replaceChildren();labels.forEach((text,i)=>{const li=document.createElement('li');li.textContent=text;li.className=i<done?'done':i===done?'active':'';$('timeline').append(li);});}
+function action(title,syncWork,asyncWork){
+ if(working){log(title+' ignored: finish the current shopping action first. Filters, typing and test clicks still work in async mode.');return;}
+ working=true;const token=generation;controller=new AbortController();const snapshotMode=mode;
+ operationStart=performance.now();trace=[];$('trace').replaceChildren();$('traceTitle').textContent=title;$('traceTotal').textContent='';
+ $('loading').hidden=false;$('loadingText').textContent=title+'…';$('bar').style.width='0%';
+ const labels=[title+' clicked','Send API request','Wait for response','Update the shop'];timeline(labels,1);
+ status(snapshotMode==='sync'?'BUSY':'FREE','WORKING');$('bubble').textContent=snapshotMode==='sync'?'I must wait here. Your clicks will be handled later.':'Networking is waiting. I can handle your other events.';
+ $('bot').className='bot '+(snapshotMode==='sync'?'busy':'');log(title+' started in '+snapshotMode+' mode');$('apiMessage').textContent=(offline?'OFFLINE simulation: ':'LIVE API: ')+title+' is waiting for a response…';
+ const complete=()=>{if(token!==generation)return;working=false;document.body.classList.remove('frozen');$('loading').hidden=true;$('bar').style.width='100%';status('FREE','DONE');timeline(labels,4);$('bubble').textContent='Finished. Try the next shopping action.';$('traceTotal').textContent='Action finished in '+((performance.now()-operationStart)/1000).toFixed(1)+' seconds.';log(title+' finished','good');$('apiMessage').textContent=(offline?'OFFLINE simulation finished. No network request was made.':'LIVE API request succeeded. Sample data received.');};
+ const failed=err=>{if(token!==generation)return;working=false;document.body.classList.remove('frozen');$('loading').hidden=true;status('FREE','ERROR');record('Stopped',err.message);$('bubble').textContent='Request failed. No success was invented.';log('API failed: '+err.message+'. Check internet/API access and retry.','bad');$('traceTotal').textContent='Request failed.';$('apiMessage').textContent='Could not load: '+err.message+'. Try “Use downloaded sample data”, or open this file through VS Code Live Server.';$('resultsTitle').textContent='Request failed — see message above';if(!products.length)$('grid').textContent='No products loaded. '+err.message;};
+ if(snapshotMode==='sync'){
+  $('freezeMsg').textContent=title+': synchronous HTTP request. Try the test-click button or typing; JS must wait for the server.';document.body.classList.add('frozen');
+  // Give the browser a paint opportunity BEFORE send() freezes JavaScript.
+  requestAnimationFrame(()=>setTimeout(()=>{if(token!==generation)return;timeline(labels,2);try{syncWork();complete();}catch(err){failed(err);}},60));
+ }else{(async()=>{try{timeline(labels,2);await asyncWork();if(token===generation)complete();}catch(err){failed(err);}})();}
+}
+function renderProducts(){
+ $('grid').replaceChildren();$('resultsTitle').textContent=products.length+' sample API products';
+ if(!products.length){$('grid').textContent='No results. Try laptop or phone.';return;}
+ products.forEach(p=>{const d=document.createElement('div');d.className='product';const pic=document.createElement('div');pic.className='pic';const img=document.createElement('img');img.src=p.thumbnail;img.alt=p.title;pic.append(img);const h=document.createElement('h4');h.textContent=p.title;const price=document.createElement('div');price.className='price';price.textContent=money(p.price);const stock=document.createElement('p');stock.className='ship';stock.textContent='Sample stock: '+p.stock;const b=document.createElement('button');b.className='add-btn';b.textContent='Add to cart';b.dataset.add=p.id;d.append(pic,h,price,stock,b);$('grid').append(d);});record('renderProducts()',products.length+' products displayed; photos load separately.');
+}
+function search(){const q=$('searchInput').value.trim()||'laptop',path='/products/search?q='+encodeURIComponent(q)+'&limit=8';showView('results');action('Search',()=>{products=requestSync(path).products;renderProducts();},async()=>{products=(await requestAsync(path)).products;renderProducts();});}
+function payload(lines=cart){return {userId:1,products:lines.map(l=>({id:l.id,quantity:l.quantity}))};}
+function applyCart(data){if(!Array.isArray(data.products))throw new Error('Invalid cart response');cart=data.products.map(p=>({...p}));badge();record('updateCartBadge()',count()+' items; simulated API cart stored locally for this session.');}
+function draftAdd(p){const next=cart.map(l=>({...l})),line=next.find(l=>l.id===p.id);if((line?.quantity||0)>=Math.min(5,p.stock))throw new Error('Stock or five-item demo limit reached.');if(line)line.quantity++;else next.push({...p,quantity:1});return next;}
+function added(){ $('addedBanner').hidden=false;$('addedBanner').textContent='Added after stock check and simulated cart API response. Open Cart next.';}
+function add(id){action('Add to Cart',()=>{const p=requestSync('/products/'+id);record('checkStock()',p.stock+' in sample stock');applyCart(requestSync('/carts/add','POST',payload(draftAdd(p))));added();},async()=>{const p=await requestAsync('/products/'+id);record('checkStock()',p.stock+' in sample stock');applyCart(await requestAsync('/carts/add','POST',payload(draftAdd(p))));added();});}
+function renderCart(){
+ const box=$('viewCart');box.replaceChildren();const panel=document.createElement('div');panel.className='panel';const h=document.createElement('h2');h.textContent='Your Cart ('+count()+' items)';panel.append(h);
+ cart.forEach(l=>{const row=document.createElement('div');row.className='line';const img=document.createElement('img');img.src=l.thumbnail;img.alt=l.title;const info=document.createElement('div');info.className='info';info.textContent=l.title+' × '+l.quantity+' — '+money(l.price*l.quantity);const del=document.createElement('button');del.className='link';del.textContent='Delete';del.dataset.del=l.id;row.append(img,info,del);panel.append(row);});
+ const sum=document.createElement('p');sum.textContent='Total: '+money(total());const buy=document.createElement('button');buy.className='yellow';buy.dataset.go='checkout';buy.textContent='Proceed to Buy';const back=document.createElement('button');back.className='link';back.dataset.go='results';back.textContent='Continue shopping';panel.append(sum,buy,back);box.append(panel);record('renderCart()',cart.length?'Your own local cart displayed.':'Cart is empty.');
+}
+function openCart(){action('Open Cart',()=>{if(cart.length)applyCart(requestSync('/carts/add','POST',payload()));else requestSync('/test');renderCart();showView('cart');},async()=>{if(cart.length)applyCart(await requestAsync('/carts/add','POST',payload()));else await requestAsync('/test');renderCart();showView('cart');});}
+function renderCheckout(){ $('coCount').textContent=count();$('coItems').replaceChildren();cart.forEach(l=>{const d=document.createElement('p');d.textContent=l.title+' × '+l.quantity+' — '+money(l.price*l.quantity);$('coItems').append(d);});$('sumItems').textContent=$('sumOrder').textContent=money(total());$('coError').hidden=true;showView('checkout');record('openCheckoutPage()','Cart totals checked with sample API. Address validation happens locally.');}
+function checkout(){if(!cart.length){log('Add an item first.','bad');return;}action('Proceed to Buy',()=>{applyCart(requestSync('/carts/add','POST',payload()));renderCheckout();},async()=>{applyCart(await requestAsync('/carts/add','POST',payload()));renderCheckout();});}
+function method(){return document.querySelector('input[name="pay"]:checked').value;}
+function validate(){
+ for(const [id,check,msg] of [['fName',v=>v.length>=2,'Enter your name'],['fPhone',v=>/^[6-9]\d{9}$/.test(v),'Enter a valid mobile number'],['fPin',v=>/^\d{6}$/.test(v),'Enter a six-digit PIN'],['fAddr',v=>v.length>=5,'Enter your address'],['fCity',v=>v.length>=2,'Enter your city']]){if(!check($(id).value.trim()))throw new Error(msg);}
+ if(method()==='upi'&&!/^[a-z0-9._-]{2,}@[a-z]{2,}$/i.test($('upiId').value.trim()))throw new Error('Enter a demo UPI ID, or select Pay on Delivery.');
+ if(method()==='netbanking'&&!$('bank').value)throw new Error('Choose a demo bank.');
+ if(method()==='card'&&(!/^\d{13,19}$/.test($('cardNo').value.replace(/\s/g,''))||$('cardName').value.trim().length<2||!/^\d{2}\/\d{2}$/.test($('cardExp').value)||!/^\d{3,4}$/.test($('cardCvv').value)))throw new Error('Fill demo card details. This is basic demo validation only.');
+}
+function confirm(){order={id:'DEMO-'+Date.now(),total:total(),method:method()};cart=[];badge();$('viewDone').replaceChildren();const panel=document.createElement('div');panel.className='panel center';const h=document.createElement('h2');h.textContent='Demo order confirmed';const p=document.createElement('p');p.textContent=order.id+' • '+money(order.total)+' • '+order.method+'. No charge, bank verification, SMS or real order occurred.';const b=document.createElement('button');b.className='yellow';b.dataset.go='results';b.textContent='Continue shopping';panel.append(h,p,b);$('viewDone').append(panel);showView('done');record('showConfirmation()','Demo only. /test checks API connectivity, not payment.');}
+function pay(){try{validate();if(!cart.length)throw new Error('Your cart is empty.');}catch(err){$('coError').textContent=err.message;$('coError').hidden=false;log('Validation stopped checkout: '+err.message,'bad');return;}
+ const delay=$('slowBank').checked?3000:0;action('Demo verification and order',()=>{requestSync('/test','GET',null,delay);confirm();},async()=>{await requestAsync('/test','GET',null,delay);confirm();});}
+function reset(){generation++;controller?.abort();working=false;products=[];cart=[];order=null;badge();longest=0;gaps=[];lastFrame=performance.now();probes=0;$('probeResult').textContent='Test clicks: 0';document.body.classList.remove('frozen');$('loading').hidden=true;$('addedBanner').hidden=true;$('filtersPanel').hidden=true;$('coError').hidden=true;$('grid').textContent='Press Search to fetch sample products.';$('resultsTitle').textContent='Ready';$('trace').replaceChildren();$('traceTitle').textContent='Choose a shopping action';$('traceTotal').textContent='';$('log').replaceChildren();$('bar').style.width='0%';$('elapsed').textContent='0.0s';$('delay').textContent='—';showView('results');status('FREE','IDLE');timeline(['Search','Add to Cart','Open Cart','Checkout','Demo payment'],0);log('Reset. '+mode+' mode. Every shopping API request has a 3-second server delay.');}
+function setMode(m){mode=m;document.querySelectorAll('.tab').forEach(t=>{t.classList.toggle('active',t.dataset.mode===m);t.setAttribute('aria-selected',t.dataset.mode===m);});$('lessonMain').textContent=m==='sync'?'Blocking mode: live synchronous XHR, or a labelled local wait if offline is selected.':'Asynchronous network requests: this action waits; other events keep working.';$('tryText').textContent='Search → Add to Cart → Cart → Proceed to Buy → Fill demo details → Pay. During EACH wait, press “Test a click while waiting”, type in Search or toggle Filters. Add to Cart takes about 6 seconds because it makes two requests.';$('warning').hidden=false;reset();}
+$('searchBtn').addEventListener('click',e=>{react(e);search();});$('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){react(e);search();}});$('searchInput').addEventListener('input',e=>log('Input event handled after '+react(e)+' ms.'));
+$('grid').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(b){react(e);add(Number(b.dataset.add));}});$('cartBtn').addEventListener('click',e=>{react(e);openCart();});$('filtersBtn').addEventListener('click',e=>{const ms=react(e);$('filtersPanel').hidden=!$('filtersPanel').hidden;log('Filters event handled after '+ms+' ms.');});
+$('probe').addEventListener('click',e=>{const ms=react(e);$('probeResult').textContent='Test clicks: '+(++probes)+' • handled after '+ms+' ms';log('TEST CLICK handled after '+ms+' ms.');});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;e.preventDefault();react(e);if(b.dataset.go==='checkout')checkout();else if(b.dataset.go==='cart')openCart();else showView(b.dataset.go);});
+$('viewCart').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;react(e);if(working)return;cart=cart.filter(l=>l.id!==Number(b.dataset.del));badge();renderCart();log('Delete is quick synchronous local work: no API wait.');});
+document.querySelectorAll('input[name="pay"]').forEach(r=>r.addEventListener('change',()=>document.querySelectorAll('.pay-body').forEach(b=>b.hidden=b.dataset.for!==method())));
+$('fillDemo').addEventListener('click',()=>{$('upiId').value='demo@okhdfcbank';$('bank').value='HDFC Bank';$('cardNo').value='4111 1111 1111 1111';$('cardName').value='Asha Rao';$('cardExp').value='12/'+String((new Date().getFullYear()+3)%100).padStart(2,'0');$('cardCvv').value='123';});$('payBtn').addEventListener('click',e=>{react(e);pay();});document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setMode(t.dataset.mode)));$('resetBtn').addEventListener('click',reset);
+$('startup').textContent='JavaScript is running ✓';$('offlineBtn').addEventListener('click',()=>{offline=true;reset();$('apiMessage').textContent='OFFLINE simulation selected. Downloaded API samples; local delays, not network requests.';search();});$('liveBtn').addEventListener('click',()=>{offline=false;reset();$('apiMessage').textContent='LIVE API selected. Press Search; internet access required.';});
+const ctx=$('beat').getContext('2d');function animate(now){const gap=now-lastFrame;lastFrame=now;if(!document.hidden){longest=Math.max(longest,gap);gaps.push(gap);if(gaps.length>100)gaps.shift();$('frames').textContent=++frames;$('gap').textContent=Math.round(gap)+' ms';$('longest').textContent=Math.round(longest)+' ms';$('spinner').style.transform='rotate('+(now/5%360)+'deg)';ctx.clearRect(0,0,292,72);ctx.strokeStyle='#4ade80';ctx.beginPath();gaps.forEach((g,i)=>{const x=i*2.9,y=65-Math.min(g,150)/150*58;if(!i)ctx.moveTo(x,y);else ctx.lineTo(x,y);});ctx.stroke();if(working){$('elapsed').textContent=((now-operationStart)/1000).toFixed(1)+'s';$('bar').style.width=Math.min(95,(now-operationStart)/6000*100)+'%';}}requestAnimationFrame(animate);}document.addEventListener('visibilitychange',()=>{lastFrame=performance.now();});requestAnimationFrame(animate);setMode('sync');
+</script>
+
+</body>
+
+</html>

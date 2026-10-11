@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sync vs Async: see the difference</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>Synchronous vs Asynchronous</h1>
+  <div class="tabs" role="tablist">
+    <button class="tab active" id="tab-sync" role="tab" data-mode="sync">1. Synchronous (blocking)</button>
+    <button class="tab" id="tab-async" role="tab" data-mode="async">2. Asynchronous (non-blocking)</button>
+  </div>
+</header>
+
+<section class="lesson" id="lesson">
+  <p class="lesson-main" id="lessonMain"></p>
+  <p class="try" id="tryText"></p>
+  <p class="lesson-sub">The problem is not synchronous code itself. The problem is long blocking work on the main thread.</p>
+</section>
+
+<div class="warning" id="warning">
+  <strong>Warning:</strong> Educational blocking demo only. Do not use busy loops like this in real apps.
+</div>
+
+<main class="layout">
+
+  <!-- ===== Fake shop ===== -->
+  <section class="shop" id="shop">
+    <div class="freeze-overlay" id="freezeOverlay">
+      <div>UI FROZEN<small>The main thread is stuck in a 4-second loop.<br>Nothing can update, not even the spinner.</small></div>
+    </div>
+
+    <nav class="nav">
+      <a class="logo" href="#" onclick="return false">shopzon<span class="smile"></span></a>
+      <div class="deliver"><small>Deliver to</small><b>Your address</b></div>
+      <div class="searchbar">
+        <select id="category" aria-label="Category"><option>All</option><option>Computers</option><option>Electronics</option></select>
+        <input id="searchInput" type="text" value="Laptop" aria-label="Search shopzon" autocomplete="off">
+        <button id="searchBtn" class="btn-search" aria-label="Search" title="Search">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0f1111" stroke-width="2.4" stroke-linecap="round"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg>
+        </button>
+      </div>
+      <div class="acct"><small>Hello, sign in</small><b>Account &amp; Lists</b></div>
+      <div class="acct"><small>Returns</small><b>&amp; Orders</b></div>
+      <button id="cartBtn" class="cart" aria-label="Cart">
+        <span class="cart-icon">
+          <span class="count" id="cartCount">0</span>
+          <svg viewBox="0 0 32 28" width="38" height="32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 2h5l3 15h15l3-11H8"/><circle cx="12" cy="24" r="2"/><circle cx="22" cy="24" r="2"/></svg>
+        </span>
+        <b>Cart</b>
+      </button>
+    </nav>
+
+    <div class="subnav">
+      <button id="filtersBtn" class="subbtn">&#9776; Filters</button>
+      <span>Today's Deals</span><span>Customer Service</span><span>Registry</span><span>Gift Cards</span><span>Sell</span>
+    </div>
+
+    <div class="results-bar">
+      <h2 id="resultsTitle">Type something and press Search</h2>
+      <div class="loading" id="loading" hidden>
+        <span class="spinner" id="spinner"></span>
+        <span id="loadingText">Loading...</span> <span id="elapsed" class="elapsed">0.0s / 4.0s</span>
+      </div>
+    </div>
+
+    <div class="progress" title="Request progress"><div id="bar"></div></div>
+
+    <div class="body">
+      <aside class="filters" id="filtersPanel" hidden>
+        <h4>Delivery Day</h4>
+        <label><input type="checkbox"> Get It Today</label>
+        <label><input type="checkbox"> Get It by Tomorrow</label>
+        <h4>Customer Reviews</h4>
+        <label><input type="checkbox"> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> &amp; Up</label>
+        <h4>Brand</h4>
+        <label><input type="checkbox"> AeroBook</label>
+        <label><input type="checkbox"> ProMax</label>
+        <label><input type="checkbox"> GameForge</label>
+        <h4>Price</h4>
+        <label><input type="checkbox"> Under $500</label>
+        <label><input type="checkbox"> $500 - $1,000</label>
+        <label><input type="checkbox"> Over $1,000</label>
+      </aside>
+      <div class="grid" id="grid">
+        <p class="empty">No products yet. Press Search to start the slow task.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Side panel ===== -->
+  <aside class="side">
+
+    <div class="card status">
+      <h3>Live status</h3>
+      <div class="row"><span>Main thread</span><b id="threadStatus" class="pill free">FREE</b></div>
+      <div class="row"><span>Request</span><b id="reqStatus" class="pill idle">IDLE</b></div>
+      <div class="row"><span>Frames drawn by JS</span><b id="frames">0</b></div>
+      <div class="row"><span>Last click reacted after</span><b id="delay" class="pill idle">-</b></div>
+      <p class="hint">Frames drawn is counted by JavaScript. If it stops, the main thread is blocked.</p>
+    </div>
+
+    <div class="card">
+      <h3>Heartbeat monitor</h3>
+      <canvas id="beat" width="292" height="72"></canvas>
+      <div class="row"><span>Gap between screen updates</span><b id="gap">-</b></div>
+      <div class="row"><span>Longest freeze</span><b id="longest">0 ms</b></div>
+      <p class="hint">Each point is one screen update. Healthy is about 16 ms. A red spike means the page was frozen for that long.</p>
+    </div>
+
+    <div class="card worker">
+      <h3>JavaScript worker</h3>
+      <div class="worker-body">
+        <div class="bot" id="bot"><i class="eye"></i><i class="eye"></i><i class="mouth"></i></div>
+        <div class="bubble" id="bubble">Waiting for work.</div>
+      </div>
+      <p class="hint">One worker does everything on the page: clicks, typing, drawing and your code.</p>
+    </div>
+
+    <div class="card">
+      <h3>Timeline</h3>
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+
+    <div class="card">
+      <h3>Activity log</h3>
+      <ul class="log" id="log"></ul>
+      <button id="resetBtn" class="btn btn-reset">Reset</button>
+    </div>
+  </aside>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

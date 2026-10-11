@@ -9,60 +9,75 @@
 // greet(sayhello);
 
 // array destructuring
-let arr = [1,2,3,4]
+// let arr = [1,2,3,4]
 // order willl be same
-let [,,thirdNum] = arr;
-console.log(thirdNum);
+// let [,,thirdNum] = arr;
+// console.log(thirdNum);
 
 //spread operator
 
-let  arr2=[...arr];
-console.log(arr2);
+// let  arr2=[...arr];
+// console.log(arr2);
 
 //object destructuring
 
-let obj = {
-    id : 101,
-    name : "srinu",
-    age : 20,
-    address:"thummalapalem"
-}
+// let obj = {
+//     id : 101,
+//     name : "srinu",
+//     age : 20,
+//     address:"thummalapalem"
+// }
 
 //same properties must be assign 
 
- let {id:orgId,name:myName,age:myAge,myvillage} = obj;
- console.log(orgId);
- console.log(myName);
+//  let {id:orgId,name:myName,age:myAge,myvillage} = obj;
+//  console.log(orgId);
+//  console.log(myName);
 
- let obj1 = {
-    id : 102,
-    name : "srinukanna",
-    age : 20,
-    address:"thummalapalem"
-}
+//  let obj1 = {
+//     id : 102,
+//     name : "srinukanna",
+//     age : 20,
+//     address:"thummalapalem"
+// }
 
 // unordered datastructure can access with flexible 
 
-let {address:localName,age:userAge} = obj;
-console.log(localName,userAge);
+// let {address:localName,age:userAge} = obj;
+// console.log(localName,userAge);
 
 //callbacks - function which is used as a parameter to another function
- function orderService(){
-    setTimeout(()=>{
-        console.log("order succesful");
-   },2000);
-}
+//  function orderService(){
+//     setTimeout(()=>{
+//         console.log("order succesful");
+//    },2000);
+// }
 
- function paymentService(){
-     setTimeout(()=>{
-        console.log("payment success")
-   },3000);
+//  function paymentService(){
+//      setTimeout(()=>{
+//         console.log("payment success")
+//    },3000);
     
-}
-async function main(){
-    await paymentService();
-    await orderService();
+// }
+// async function main(){
+//     await paymentService();
+//     await orderService();
+// }
+
+
+// //promises
+
+
+// asynchronous 
+// Arrow functions
+function add(a,b){
+    return a+b;
 }
 
 
-//promises
+console.log(add(10,20));
+
+const add = (a,b) => a+b;
+let a = 10;
+console.log(add(10,20));
+
